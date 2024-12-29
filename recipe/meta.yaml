@@ -7,18 +7,18 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/pycsep-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/pycsep-{{ version }}.tar.gz
   sha256: 63c819252ae13f652a17886bf9e52d2d9033dd7932d8aed7dc14ad396d7e130d
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
     - pip
-    - python >=3.7
+    - python {{ python_min }}
   run:
     - cartopy
     - matplotlib-base
@@ -26,7 +26,7 @@ requirements:
     - obspy
     - pandas
     - pyproj
-    - python >=3.7
+    - python >={{ python_min }}
     - python-dateutil
     - scipy
     - shapely
@@ -40,6 +40,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/SCECCode/pycsep
